@@ -128,10 +128,22 @@ class Fighter extends Sprite{
         
 
         //Updating Position with Velocity
-        this.position.x += this.velocity.x;
-        this.position.y += this.velocity.y;
-        
-        //To make sure Character doesn't go out of Canvas
+        // Check If Player doesn't over Canvas Height
+        if (this.position.y < 0) {
+            this.position.y += 1
+        } else {
+            this.position.y += this.velocity.y;
+        }
+        // Check If Player doesn't go behind left side of Canvas Width
+        if (this.position.x < 0) {
+            this.position.x += 1;
+            // Check If Player doesn't go behind right side of Canvas Width
+        } else if (this.position.x > 950) {
+            this.position.x -= 1;
+        } else {
+            this.position.x += this.velocity.x;
+        }
+        //To make sure Character doesn't fall through floor of Canvas
         if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
             this.velocity.y = 0;
             this.position.y = 330;
